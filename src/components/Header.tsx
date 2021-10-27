@@ -15,10 +15,11 @@ import { useAuth } from '../hooks/useAuth';
 
 import instagramLogoText from '../assets/images/insta-logo-text.svg';
 import instagramLogoIcon from '../assets/images/insta-logo-icon.png';
+import { useModal } from '../hooks/useModal';
 
 export const Header: React.FC = () => {
-  const { user, isAuthenticated, signInWithGoogle, signOutFromGoogle } =
-    useAuth();
+  const { user, isAuthenticated, signInWithGoogle } = useAuth();
+  const { handleOpenModal } = useModal();
 
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-100">
@@ -40,7 +41,7 @@ export const Header: React.FC = () => {
           <input
             type="text"
             placeholder="Search"
-            className="min-w-0 bg-gray-50 px-3 mx-3 text-sm border border-gray-300 focus:ring-black focus:border-black rounded-md py-1.5 hidden sm:flex"
+            className="min-w-0 bg-gray-50 px-3 mx-3 text-sm border border-gray-300 rounded-md py-1.5 hidden sm:flex"
           />
         )}
 
@@ -48,23 +49,23 @@ export const Header: React.FC = () => {
           <div className="flex flex-row items-center gap-3">
             <div className="flex-row gap-3 hidden md:flex">
               <button type="button">
-                <HomeIcon className="w-6 h-6" />
+                <HomeIcon className="w-6 h-6 text-gray-800" />
               </button>
 
               <button type="button">
-                <ChatAlt2Icon className="w-6 h-6 cursor-pointer" />
+                <ChatAlt2Icon className="w-6 h-6 text-gray-700" />
+              </button>
+
+              <button type="button" onClick={handleOpenModal}>
+                <PlusCircleIcon className="w-6 h-6 text-gray-700" />
               </button>
 
               <button type="button">
-                <PlusCircleIcon className="w-6 h-6 cursor-pointer" />
+                <UserGroupIcon className="w-6 h-6 text-gray-700" />
               </button>
 
               <button type="button">
-                <UserGroupIcon className="w-6 h-6 cursor-pointer" />
-              </button>
-
-              <button type="button">
-                <HeartIcon className="w-6 h-6 cursor-pointer" />
+                <HeartIcon className="w-6 h-6 text-gray-700" />
               </button>
             </div>
 
@@ -72,17 +73,16 @@ export const Header: React.FC = () => {
               <MenuIcon className="w-6 h-6 md:hidden" />
             </button>
 
-            <button
-              type="button"
-              onClick={signOutFromGoogle}
+            <Link
               className="focus:outline-none focus:ring-2 ring-black ring-offset-2 rounded-full"
+              to={`/profile/${user?.id}`}
             >
               <img
                 src={user?.avatar}
                 alt={user?.name}
                 className="w-8 h-8 rounded-full cursor-pointer"
               />
-            </button>
+            </Link>
           </div>
         ) : (
           <button type="button" onClick={signInWithGoogle}>

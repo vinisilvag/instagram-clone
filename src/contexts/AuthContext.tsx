@@ -8,12 +8,7 @@ import {
   signOut,
 } from 'firebase/auth';
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-};
+import type { User } from '../types/User';
 
 type AuthContextType = {
   user: User | undefined;

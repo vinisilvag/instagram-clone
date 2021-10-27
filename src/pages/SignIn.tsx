@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Helmet } from 'react-helmet-async';
+
 import { Header } from '../components/Header';
 
 import { useAuth } from '../hooks/useAuth';
@@ -10,7 +12,15 @@ export const SignIn: React.FC = () => {
   const { signInWithGoogle } = useAuth();
 
   return (
-    <>
+    <div className="bg-gray-50 h-screen">
+      <Helmet>
+        <title>Sign In | Instagram</title>
+        <meta
+          name="description"
+          content="Log in to the platform and connect with people you know!"
+        />
+      </Helmet>
+
       <Header />
 
       <section className="w-full mt-32 flex items-center justify-center">
@@ -30,6 +40,6 @@ export const SignIn: React.FC = () => {
           </button>
         </main>
       </section>
-    </>
+    </div>
   );
 };
