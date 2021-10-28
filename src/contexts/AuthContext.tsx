@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 import {
-  getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
+import { auth } from '../services/firebase';
 
 import type { User } from '../types/User';
 
@@ -25,8 +25,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const auth = getAuth();
-
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         const { displayName, email, photoURL, uid } = authUser;
@@ -50,7 +48,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signInWithGoogle = async () => {
-    const auth = getAuth();
     const provider = new GoogleAuthProvider();
 
     const result = await signInWithPopup(auth, provider);
@@ -72,8 +69,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const signOutFromGoogle = async () => {
-    const auth = getAuth();
-
     await signOut(auth);
 
     setUser(undefined);

@@ -12,7 +12,7 @@ import { CommentItem } from './CommentItem';
 
 export const PostItem: React.FC = () => (
   <div className="w-full border border-gray-200 shadow-sm rounded-sm">
-    <header className="p-4 flex items-center justify-between bg-white">
+    <header className="p-4 flex items-center justify-between bg-white border-b border-gray-200">
       <div className="flex flex-row items-center justify-center">
         <Link to="/">
           <img
